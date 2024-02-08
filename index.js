@@ -1,30 +1,55 @@
-const express = require("express");
-const { fetch } = require("node-fetch");
-// import fetch from "node-fetch";
-const redis = require("redis");
+import express from "express";
+import axios from "axios";
+import bodyParser from "body-parser";
+import cors from "cors";
+import { createClient } from "redis";
+import { MenuRouter } from "./src/routes/menuRoute.js";
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 const PORT = process.env.port || 5000;
-const REDIS_PORT = process.env.port || 6379;
-
-const client = redis.createClient(REDIS_PORT);
-
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
 });
 
+const client = createClient();
+await client.connect();
+
 const getUserData = async (req, res) => {
   try {
     const { username } = req.params;
-    const response = await fetch(`https://api.github.com/users/${username}`);
-    const data = await response.json();
-    res.send(data);
+    const response = await axios.get(
+      `https://api.github.com/users/${username}`,
+    );
+    await client.set(username, response.data.public_repos);
+    res.send(setResponse(username, response.data.public_repos));
   } catch (error) {
     console.error(error);
     return;
   }
 };
 
-app.get("/github/:username", getUserData);
+const cacheData = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const data = await client.get(username);
+    if (data !== null) {
+      res.send(setResponse(username, data));
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+};
 
-module.exports = app;
+const setResponse = (username, repos) => {
+  return `<h2>${username} has ${repos} Github Repositories </h2>`;
+};
+
+app.get("/github/:username", cacheData, getUserData);
+app.use("/menu/list", MenuRouter);

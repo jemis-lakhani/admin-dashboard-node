@@ -3,25 +3,25 @@ const menuItems = [
     id: "member-manage",
     title: "Member Manage",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "account_circle",
     children: [
       {
         id: "member-list",
         title: "Member List",
         type: "item",
-        url: "/member-list",
+        url: "/memberManage/memberList",
       },
       {
         id: "accessor-list",
         title: "Accessors List",
         type: "item",
-        url: "/accessor-list",
+        url: "/memberManage/accessorList",
       },
       {
         id: "member-note",
         title: "Member's Note",
         type: "item",
-        url: "/member-note",
+        url: "/memberManage/memberNote",
       },
     ],
   },
@@ -29,13 +29,13 @@ const menuItems = [
     id: "game-manage",
     title: "Game Manage",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "gamepad",
     children: [
       {
         id: "mini-games",
         title: "Mini Games",
         type: "item",
-        url: "/mini-games",
+        url: "/gameManage/miniGames",
       },
     ],
   },
@@ -43,31 +43,31 @@ const menuItems = [
     id: "betting-manage",
     title: "Betting Manage",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "view_list",
     children: [
       {
         id: "sports",
         title: "Sports",
         type: "item",
-        url: "/sports",
+        url: "/bettingManage/sports",
       },
       {
         id: "casino",
         title: "Casino",
         type: "item",
-        url: "/casino",
+        url: "/bettingManage/casino",
       },
       {
         id: "slot",
         title: "Slot",
         type: "item",
-        url: "/slot",
+        url: "/bettingManage/slot",
       },
       {
         id: "mini-game",
         title: "Mini Game",
         type: "item",
-        url: "/mini-game",
+        url: "/bettingManage/miniGame",
       },
     ],
   },
@@ -75,19 +75,19 @@ const menuItems = [
     id: "in-out-manage",
     title: "In Out Manage",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "account_balance",
     children: [
       {
         id: "deposit-list",
         title: "Deposite List",
         type: "item",
-        url: "/deposit-list",
+        url: "/inOutManage/depositList",
       },
       {
         id: "withdrawal-list",
         title: "Withdrawal List",
         type: "item",
-        url: "/withdrawal-list",
+        url: "/inOutManage/withdrawalList",
       },
     ],
   },
@@ -95,19 +95,19 @@ const menuItems = [
     id: "bulletin-boards-manage",
     title: "Bulletin Boards Manage",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "create",
     children: [
       {
         id: "qa-list",
         title: "QA List",
         type: "item",
-        url: "/qa-list",
+        url: "/bulletinBoardsManage/qaList",
       },
       {
         id: "notice",
         title: "Notice",
         type: "item",
-        url: "/notice",
+        url: "/bulletinBoardsManage/notice",
       },
     ],
   },
@@ -115,19 +115,19 @@ const menuItems = [
     id: "statistics",
     title: "Statistics",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "timelapse",
     children: [
       {
         id: "daily-statistics",
         title: "Daily Statistics",
         type: "item",
-        url: "/daily-statistics",
+        url: "/statistics/dailyStatistics",
       },
       {
         id: "monthly-statistics",
         title: "Monthly Statistics",
         type: "item",
-        url: "/monthly-statistics",
+        url: "/statistics/monthlyStatistics",
       },
     ],
   },
@@ -135,19 +135,19 @@ const menuItems = [
     id: "partner-management",
     title: "Partner Management",
     type: "group",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "assignment_ind",
     children: [
       {
         id: "partner-list",
         title: "Partner List",
         type: "item",
-        url: "/partner-list",
+        url: "/partnerManagement/partnerList",
       },
       {
         id: "partner-registration",
         title: "Partner Registration",
         type: "item",
-        url: "/partner-registration",
+        url: "/partnerManagement/partnerRegistration",
       },
     ],
   },
@@ -155,18 +155,40 @@ const menuItems = [
     id: "preferences",
     title: "Preferences",
     type: "single-item",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "settings",
     url: "/preferences",
   },
   {
     id: "administrator",
     title: "Administrator",
     type: "single-item",
-    icon: "https://fonts.google.com/icons?icon.style=Rounded&icon.platform=web&icon.set=Material+Symbols&selected=Material+Symbols+Rounded:account_circle:FILL@0;wght@300;GRAD@0;opsz@24&icon.query=Account+Circle",
+    icon: "font_download",
     url: "/administrator",
   },
 ];
 
 export const getMenuItems = (req, res) => {
   res.send(menuItems);
+};
+
+const notification = [
+  {
+    title: "New Deposit",
+    body: "The new deposit has been made by user123.",
+    date: "Today 5:45 pm - 12.06.2023",
+  },
+  {
+    title: "New Withdrawal",
+    body: "The new withdrawal has been made by user123.",
+    date: "Today 5:45 pm - 12.06.2023",
+  },
+  {
+    title: "New Login",
+    body: "The new login attempt has been made by user123.",
+    date: "Today 5:45 pm - 12.06.2023",
+  },
+];
+
+export const getNotifications = (req, res) => {
+  res.send(notification);
 };

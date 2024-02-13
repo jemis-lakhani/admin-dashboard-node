@@ -3,11 +3,15 @@ import axios from "axios";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { createClient } from "redis";
+import helmet from "helmet";
 import { MenuRouter } from "./src/routes/menuRoute.js";
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(helmet());
 app.use(cors());
 
 const PORT = process.env.port || 5000;

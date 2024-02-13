@@ -176,16 +176,19 @@ const notification = [
     title: "New Deposit",
     body: "The new deposit has been made by user123.",
     date: "Today 5:45 pm - 12.06.2023",
+    type: "success",
   },
   {
     title: "New Withdrawal",
     body: "The new withdrawal has been made by user123.",
     date: "Today 5:45 pm - 12.06.2023",
+    type: "error",
   },
   {
     title: "New Login",
     body: "The new login attempt has been made by user123.",
     date: "Today 5:45 pm - 12.06.2023",
+    type: "warning",
   },
 ];
 

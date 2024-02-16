@@ -17,5 +17,6 @@ export const Session = session({
     httpOnly: true, // if true: prevents client side js from reading the cookie
     maxAge: 5 * 60 * 1000, // 5 minute
     sameSite: "none",
+    path: "/",
   },
 });

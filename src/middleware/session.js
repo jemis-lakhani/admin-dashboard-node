@@ -16,5 +16,6 @@ export const Session = session({
     secure: process.env.ENVIRONMENT === "production", // if true: only transmit cookie over https
     httpOnly: true, // if true: prevents client side js from reading the cookie
     maxAge: 5 * 60 * 1000, // 5 minute
+    sameSite: "none",
   },
 });

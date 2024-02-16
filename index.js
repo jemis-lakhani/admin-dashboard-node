@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
+app.set("trust proxy", process.env.ENVIRONMENT !== "production");
+
 // cors setup
 const whitelist = new Set(["http://example.com"]);
 const corsOptions = {

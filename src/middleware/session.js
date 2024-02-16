@@ -13,7 +13,7 @@ export const Session = session({
   saveUninitialized: false,
   name: "sessionId",
   cookie: {
-    secure: false, // if true: only transmit cookie over https
+    secure: process.env.ENVIRONMENT === "production", // if true: only transmit cookie over https
     httpOnly: true, // if true: prevents client side js from reading the cookie
     maxAge: 5 * 60 * 1000, // 5 minute
   },

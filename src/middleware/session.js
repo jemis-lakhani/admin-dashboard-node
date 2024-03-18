@@ -18,8 +18,8 @@ export const Session = session({
     maxAge: 5 * 60 * 1000, // 5 minute
 
     // below lines for production only
-    path: "/",
-    sameSite: "none",
-    domain: ".vercel.app",
+    // path: "/",
+    // sameSite: "none",
+    // domain: ".vercel.app",
   },
 });

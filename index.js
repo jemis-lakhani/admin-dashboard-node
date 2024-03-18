@@ -7,6 +7,8 @@ import { LoginRouter } from "./src/routes/loginRoute.js";
 import { SettingRouter } from "./src/routes/settingRoute.js";
 import { Session } from "./src/middleware/session.js";
 import { authenticate } from "./src/middleware/authenticate.js";
+import { sqlConfig } from "./src/db/mssql.js";
+import sql from "mssql";
 
 const app = express();
 app.use(express.json());
@@ -16,6 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 
 app.set("trust proxy", process.env.ENVIRONMENT === "production");
+
+// database connection setup
+const appPool = new sql.ConnectionPool(sqlConfig);
 
 // cors setup
 const whitelist = new Set(["http://example.com"]);
@@ -41,6 +46,16 @@ app.use("/menu/list", authenticate, MenuRouter);
 app.use("/admin/setting", authenticate, SettingRouter);
 
 const PORT = process.env.port || 5000;
+
+appPool
+  .connect()
+  .then(function (pool) {
+    app.locals.db = pool;
+    console.log("Database Connected.");
+  })
+  .catch(function (err) {
+    console.error("Error creating connection pool", err);
+  });
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
 });

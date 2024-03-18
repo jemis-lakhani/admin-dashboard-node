@@ -1,174 +1,22 @@
-const menuItems = [
-  {
-    id: "member-manage",
-    title: "Member Manage",
-    type: "group",
-    icon: "account_circle",
-    children: [
-      {
-        id: "member-list",
-        title: "Member List",
-        type: "item",
-        url: "/memberManage/memberList",
-      },
-      {
-        id: "accessor-list",
-        title: "Accessors List",
-        type: "item",
-        url: "/memberManage/accessorList",
-      },
-      {
-        id: "member-note",
-        title: "Member's Note",
-        type: "item",
-        url: "/memberManage/memberNote",
-      },
-    ],
-  },
-  {
-    id: "game-manage",
-    title: "Game Manage",
-    type: "group",
-    icon: "gamepad",
-    children: [
-      {
-        id: "mini-games",
-        title: "Mini Games",
-        type: "item",
-        url: "/gameManage/miniGames",
-      },
-    ],
-  },
-  {
-    id: "betting-manage",
-    title: "Betting Manage",
-    type: "group",
-    icon: "view_list",
-    children: [
-      {
-        id: "sports",
-        title: "Sports",
-        type: "item",
-        url: "/bettingManage/sports",
-      },
-      {
-        id: "casino",
-        title: "Casino",
-        type: "item",
-        url: "/bettingManage/casino",
-      },
-      {
-        id: "slot",
-        title: "Slot",
-        type: "item",
-        url: "/bettingManage/slot",
-      },
-      {
-        id: "mini-game",
-        title: "Mini Game",
-        type: "item",
-        url: "/bettingManage/miniGame",
-      },
-    ],
-  },
-  {
-    id: "in-out-manage",
-    title: "In Out Manage",
-    type: "group",
-    icon: "account_balance",
-    children: [
-      {
-        id: "deposit-list",
-        title: "Deposite List",
-        type: "item",
-        url: "/inOutManage/depositList",
-      },
-      {
-        id: "withdrawal-list",
-        title: "Withdrawal List",
-        type: "item",
-        url: "/inOutManage/withdrawalList",
-      },
-    ],
-  },
-  {
-    id: "bulletin-boards-manage",
-    title: "Bulletin Boards Manage",
-    type: "group",
-    icon: "create",
-    children: [
-      {
-        id: "qa-list",
-        title: "QA List",
-        type: "item",
-        url: "/bulletinBoardsManage/qaList",
-      },
-      {
-        id: "notice",
-        title: "Notice",
-        type: "item",
-        url: "/bulletinBoardsManage/notice",
-      },
-    ],
-  },
-  {
-    id: "statistics",
-    title: "Statistics",
-    type: "group",
-    icon: "timelapse",
-    children: [
-      {
-        id: "daily-statistics",
-        title: "Daily Statistics",
-        type: "item",
-        url: "/statistics/dailyStatistics",
-      },
-      {
-        id: "monthly-statistics",
-        title: "Monthly Statistics",
-        type: "item",
-        url: "/statistics/monthlyStatistics",
-      },
-    ],
-  },
-  {
-    id: "partner-management",
-    title: "Partner Management",
-    type: "group",
-    icon: "assignment_ind",
-    children: [
-      {
-        id: "partner-list",
-        title: "Partner List",
-        type: "item",
-        url: "/partnerManagement/partnerList",
-      },
-      {
-        id: "partner-registration",
-        title: "Partner Registration",
-        type: "item",
-        url: "/partnerManagement/partnerRegistration",
-      },
-    ],
-  },
-  {
-    id: "preferences",
-    title: "Preferences",
-    type: "single-item",
-    icon: "settings",
-    url: "/preferences",
-  },
-  {
-    id: "administrator",
-    title: "Administrator",
-    type: "single-item",
-    icon: "font_download",
-    url: "/administrator",
-  },
-];
+import { Procedure_Menu_SelectList } from "../procedures/menu.procedure.js";
 
-export const getMenuItems = (req, res) => {
-  res.send(menuItems);
+export const getMenuItems = async (req, res) => {
+  try {
+    const menu = await Procedure_Menu_SelectList(req);
+    let result = new Map();
+    menu.forEach((item) => {
+      if (item.ParentMenuID === 0) {
+        result.set(item.MenuID, { ...item, type: "single-item", children: [] });
+      } else {
+        let parent = result.get(item.ParentMenuID);
+        parent.children.push({ ...item, type: "item" });
+        result.set(parent.MenuID, { ...parent, type: "group" });
+      }
+    });
+    res.send(Array.from(result.values()));
+  } catch (error) {
+    console.log("err", error);
+  }
 };
 
 const notification = [

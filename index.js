@@ -37,8 +37,10 @@ app.use(cors(corsOptions));
 app.use(Session);
 
 app.use("/admin/login", LoginRouter);
-app.use("/menu/list", authenticate, MenuRouter);
-app.use("/admin/setting", authenticate, SettingRouter);
+// app.use("/menu/list", authenticate, MenuRouter);
+// app.use("/admin/setting", authenticate, SettingRouter);
+app.use("/menu/list", MenuRouter);
+app.use("/admin/setting", SettingRouter);
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {

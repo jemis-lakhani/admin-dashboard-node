@@ -18,43 +18,50 @@ export const adminLogin = async (req, res) => {
     res.status(400).json({ message: "Username or Password missing!" });
 
   // if (allowedIps.includes(ip)) {
-  if (true) {
-    if (checkUser(username, password)) {
-      await redisClient.set(
-        "log_login_success_" + `${Date.now()}`,
-        JSON.stringify({
-          username,
-          time: new Date(),
-          ip,
-          message: "Successful Login.",
-        })
-      );
-      req.session.isLoggedIn = true;
-      req.session.username = username;
-      response = {
-        ip,
-        username,
-      };
-      status = 200;
-    } else {
-      await redisClient.set(
-        "log_login_failed_" + `${Date.now()}`,
-        JSON.stringify({
-          username,
-          time: new Date(),
-          ip,
-          message: "Login Failed.",
-        })
-      );
-      response = {
-        message: "Invalid username or password.",
-      };
-      status = 401;
-    }
-  } else {
-    response = { message: "You are not allowed!" };
-    status = 405;
-  }
+  // if (true) {
+  //   if (checkUser(username, password)) {
+  //     await redisClient.set(
+  //       "log_login_success_" + `${Date.now()}`,
+  //       JSON.stringify({
+  //         username,
+  //         time: new Date(),
+  //         ip,
+  //         message: "Successful Login.",
+  //       })
+  //     );
+  //     req.session.isLoggedIn = true;
+  //     req.session.username = username;
+  //     response = {
+  //       ip,
+  //       username,
+  //     };
+  //     status = 200;
+  //   } else {
+  //     await redisClient.set(
+  //       "log_login_failed_" + `${Date.now()}`,
+  //       JSON.stringify({
+  //         username,
+  //         time: new Date(),
+  //         ip,
+  //         message: "Login Failed.",
+  //       })
+  //     );
+  //     response = {
+  //       message: "Invalid username or password.",
+  //     };
+  //     status = 401;
+  //   }
+  // } else {
+  //   response = { message: "You are not allowed!" };
+  //   status = 405;
+  // }
+
+  // for portfolio
+  response = {
+    ip,
+    username,
+  };
+  status = 200;
   res.status(status).json(response);
 };
 
